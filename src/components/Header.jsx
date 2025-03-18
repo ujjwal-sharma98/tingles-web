@@ -11,7 +11,17 @@ const pages = [{
     name: 'Interests',
     link: '/interests',
 }];
-const settings = ['Profile', 'Account', 'Logout'];
+
+const settings = [{
+    name: 'Profile',
+    link: '/profile',
+},{
+    name: 'Account',
+    link: '/account',
+},{
+    name: 'Logout',
+    link: '/signup',
+}];
 
 const Header = () => {
     const [anchorElNav, setAnchorElNav] = useState(null);
@@ -148,7 +158,7 @@ const Header = () => {
               >
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
+                    <Link to={setting.link}><Typography sx={{ textAlign: 'center' }}>{setting.name}</Typography></Link>
                   </MenuItem>
                 ))}
               </Menu>
