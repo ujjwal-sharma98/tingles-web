@@ -1,9 +1,19 @@
 import React from 'react';
+import FeedCard from '../components/FeedCard';
 
 const HomePage = () => {
     return (
         <div>
-            <h1>Welcome to the Homepage!</h1>
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "80vh",
+                }}
+            >
+                <FeedCard />
+            </div>
         </div>
     );
 };
