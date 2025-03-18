@@ -12,8 +12,12 @@ import {
   InputAdornment 
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
+
 
 const SignupPage = () => {
+
+  const navigate = useNavigate();
 
   const [signup, setSignUp] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
@@ -46,8 +50,8 @@ const SignupPage = () => {
     },
     validationSchema,
     onSubmit: (values) => {
-      console.log("Form Data:", values);
-      alert(signup ? "Signup Successful!" : "Login Successful!");
+        console.log("Form Data:", values);
+        navigate("/");
     },
   });
 
