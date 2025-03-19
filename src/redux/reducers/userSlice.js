@@ -19,6 +19,17 @@ export const fetchUser = createAsyncThunk('user/fetchUser', async () => {
     }
 });
 
+export const updateUser = createAsyncThunk('user/updateUser', async (userData) => {
+    try {
+        const response = await axios.patch(`${BASE_URL}/profile/edit`, userData, {
+            withCredentials: true,
+        });
+        return response.data.data;
+    } catch (error) {
+        throw error.response.data;
+    }
+});
+
 const userSlice = createSlice({
     name: 'user',
     initialState,
@@ -35,6 +46,19 @@ const userSlice = createSlice({
                 state.error = null;
             })
             .addCase(fetchUser.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message;
+            })
+            .addCase(updateUser.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(updateUser.fulfilled, (state, action) => {
+                state.user = action.payload;
+                state.loading = false;
+                state.error = null;
+            })
+            .addCase(updateUser.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
             });

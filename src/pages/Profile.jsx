@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import * as Yup from "yup";
 import {
   TextField,
@@ -17,11 +17,13 @@ import {
   ListItemText,
   CircularProgress
 } from "@mui/material";
+import { updateUser } from "../redux/reducers/userSlice"
 
 const skillsList = ["JavaScript", "React", "Node.js", "MongoDB", "CSS", "HTML"];
 
 const EditProfile = () => {
 
+    const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userReducer); // Get user from Redux store
   const [loading, setLoading] = useState(true);
 
@@ -51,6 +53,7 @@ const EditProfile = () => {
     onSubmit: (values) => {
       console.log("Form Data:", values);
       alert("Profile Updated Successfully!");
+      dispatch(updateUser(values))
     },
   });
 
@@ -64,6 +67,7 @@ const EditProfile = () => {
         skills: user.skills || [],
         gender: user.gender || "",
         age: user.age || null,
+        photoUrl: user.photoUrl || "",
       });
       setLoading(false);
     }
@@ -169,7 +173,7 @@ const EditProfile = () => {
               label="About"
               name="about"
               multiline
-              rows={3}
+              rows={2}
               fullWidth
               variant="outlined"
               value={formik.values.about}
