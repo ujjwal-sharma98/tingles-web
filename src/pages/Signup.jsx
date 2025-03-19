@@ -47,7 +47,7 @@ const SignupPage = () => {
           .oneOf([Yup.ref("password")], "Passwords must match")
           .required("Confirm Password is required")
       : Yup.string().notRequired(),
-    gender: Yup.string().required("Please select your gender"),
+    gender: signup ? Yup.string().required("Please select your gender") : Yup.string().notRequired(),
   });
 
   const formik = useFormik({

@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import Cookies from "js-cookie";
 import { BASE_URL } from '../../utils/constants';
 
 export const loginUser = createAsyncThunk(
@@ -8,6 +9,7 @@ export const loginUser = createAsyncThunk(
       try {
         const response = await axios.post(`${BASE_URL}/login`, userData);
         console.log(response.data);
+        Cookies.set("token", response.data.token, { expires: 7 });
         return response.data;
       } catch (error) {
         return rejectWithValue(error.response ? error.response.data : "Login failed");
@@ -21,6 +23,7 @@ export const signUpUser = createAsyncThunk(
       try {
         const response = await axios.post(`${BASE_URL}/signup`, userData);
         console.log(response.data);
+        Cookies.set("token", response.data.token, { expires: 7 });
         return response.data;
       } catch (error) {
         return rejectWithValue(error.response ? error.response.data : "Sign up failed");
@@ -34,6 +37,7 @@ export const logOutUser = createAsyncThunk(
       try {
         const response = await axios.post(`${BASE_URL}/logout`, userData);
         console.log(response.data);
+        Cookies.remove("token");
         return response.data;
       } catch (error) {
         return rejectWithValue(error.response ? error.response.data : "Sign up failed");
@@ -77,6 +81,24 @@ const authSlice = createSlice({
             state.user = action.payload;
         })
             .addCase(signUpUser.rejected, (state, action) => {
+            state.loading = false;
+            state.isLoggedIn = false;
+            state.user = null;
+            state.error = action.payload;
+        })
+        // Log Out
+        .addCase(logOutUser.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+            state.isLoggedIn = false;
+            state.user = null;
+        })
+            .addCase(logOutUser.fulfilled, (state) => {
+            state.loading = false;
+            state.isLoggedIn = false;
+            state.user = null;
+        })
+            .addCase(logOutUser.rejected, (state, action) => {
             state.loading = false;
             state.isLoggedIn = false;
             state.user = null;

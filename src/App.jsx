@@ -12,6 +12,7 @@ import MyMatches from "./pages/MyMatches";
 import Interests from "./pages/Interests";
 import Account from "./pages/Account";
 import Profile from "./pages/Profile";
+import ProtectedRoute from "./components/protectedroute";
 
 const theme = createTheme({
   palette: {
@@ -30,13 +31,15 @@ function App() {
         <Router>
             <Routes>
               <Route path="/signup" element={<Signup />} />
-              <Route path="/dashboard" element={<Home />}>
-                <Route path="/dashboard" element={<Feed />} />
-                <Route path="/dashboard/my-matches" element={<MyMatches />} />
-                <Route path="/dashboard/interests" element={<Interests />} />
-                <Route path="/dashboard/profile" element={<Profile />} />
-                <Route path="/dashboard/account" element={<Account />} />
-              </Route>
+                <Route element={<ProtectedRoute />}>
+                  <Route path="/dashboard" element={<Home />}>
+                    <Route path="/dashboard" element={<Feed />} />
+                    <Route path="/dashboard/my-matches" element={<MyMatches />} />
+                    <Route path="/dashboard/interests" element={<Interests />} />
+                    <Route path="/dashboard/profile" element={<Profile />} />
+                    <Route path="/dashboard/account" element={<Account />} />
+                  </Route>
+                </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>
         </Router>
