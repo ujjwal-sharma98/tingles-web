@@ -11,7 +11,7 @@ import MyMatches from "./pages/MyMatches";
 import Interests from "./pages/Interests";
 import Account from "./pages/Account";
 import Profile from "./pages/Profile";
-import ProtectedRoute from "./components/protectedroute";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const theme = createTheme({
   palette: {
