@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import {
@@ -18,22 +18,25 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser, signUpUser } from "../redux/reducers/authSlice";
 
 const SignupPage = () => {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [signup, setSignUp] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  const { isLoggedIn, error, loading } = useSelector((state) => state.authReducer);
 
   const validationSchema = Yup.object({
-    name: signup
+    firstName: signup
       ? Yup.string().min(3, "Must be at least 3 characters").required("Required")
       : Yup.string().notRequired(),
-    email: Yup.string()
+    emailId: Yup.string()
       .email("Invalid email format")
       .required("Email is required"),
     password: Yup.string()
@@ -49,17 +52,27 @@ const SignupPage = () => {
 
   const formik = useFormik({
     initialValues: {
-      name: "",
-      email: "",
+      firstName: "",
+      emailId: "",
       password: "",
       confirmPassword: "",
     },
     validationSchema,
     onSubmit: (values) => {
         console.log("Form Data:", values);
-        navigate("/");
+        if (signup) {
+            dispatch(signUpUser(values))
+        } else {
+            dispatch(loginUser({ emailId: values.emailId, password: values.password }));
+        }
     },
   });
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  }, [isLoggedIn, navigate]);
 
   return (
     <Container
@@ -92,14 +105,14 @@ const SignupPage = () => {
               <Grid item>
                 <TextField
                   label="Name"
-                  name="name"
+                  name="firstName"
                   fullWidth
                   variant="outlined"
-                  value={formik.values.name}
+                  value={formik.values.firstName}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  error={formik.touched.name && Boolean(formik.errors.name)}
-                  helperText={formik.touched.name && formik.errors.name}
+                  error={formik.touched.firstName && Boolean(formik.errors.firstName)}
+                  helperText={formik.touched.firstName && formik.errors.firstName}
                 />
               </Grid>
             )}
@@ -107,15 +120,15 @@ const SignupPage = () => {
             <Grid item>
               <TextField
                 label="Email"
-                name="email"
+                name="emailId"
                 type="email"
                 fullWidth
                 variant="outlined"
-                value={formik.values.email}
+                value={formik.values.emailId}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                error={formik.touched.email && Boolean(formik.errors.email)}
-                helperText={formik.touched.email && formik.errors.email}
+                error={formik.touched.emailId && Boolean(formik.errors.emailId)}
+                helperText={formik.touched.emailId && formik.errors.emailId}
               />
             </Grid>
 
@@ -215,7 +228,8 @@ const SignupPage = () => {
                 </div>
               )}
             </Grid>
-
+            {loading && <Typography variant="h6">Loading...</Typography>}
+            {error && <Typography variant="h6" color="error">{error}</Typography>}
             <Grid item>
               <Button
                 type="submit"
