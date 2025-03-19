@@ -60,13 +60,14 @@ const EditProfile = () => {
         firstName: user.firstName || "",
         lastName: user.lastName || "",
         emailId: user.emailId || "",
-        about: user.about || "This is a default about of the user!",
+        about: user.about || "about...",
         skills: user.skills || [],
+        gender: user.gender || "",
+        age: user.age || null,
       });
       setLoading(false);
     }
   }, [user]);
-
 
   return (
     <Container maxWidth="sm" sx={{ mt: 5 }}>

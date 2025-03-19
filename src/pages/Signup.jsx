@@ -102,19 +102,33 @@ const SignupPage = () => {
             </Grid>
 
             {signup && (
-              <Grid item>
-                <TextField
-                  label="Name"
-                  name="firstName"
-                  fullWidth
-                  variant="outlined"
-                  value={formik.values.firstName}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={formik.touched.firstName && Boolean(formik.errors.firstName)}
-                  helperText={formik.touched.firstName && formik.errors.firstName}
-                />
-              </Grid>
+                <>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                        label="First Name"
+                        name="firstName"
+                        fullWidth
+                        variant="outlined"
+                        value={formik.values.firstName}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.firstName && Boolean(formik.errors.firstName)}
+                        helperText={formik.touched.firstName && formik.errors.firstName}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            label="Last Name"
+                            name="lastName"
+                            fullWidth
+                            variant="outlined"
+                            value={formik.values.lastName}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                        />
+                    </Grid>
+                </>
             )}
 
             <Grid item>
