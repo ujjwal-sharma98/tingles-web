@@ -9,7 +9,12 @@ import {
   Typography,
   Box,
   IconButton, 
-  InputAdornment 
+  InputAdornment,
+  FormControlLabel,
+  FormControl,
+  FormLabel,
+  RadioGroup,
+  Radio
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
@@ -39,6 +44,7 @@ const SignupPage = () => {
           .oneOf([Yup.ref("password")], "Passwords must match")
           .required("Confirm Password is required")
       : Yup.string().notRequired(),
+    gender: Yup.string().required("Please select your gender"),
   });
 
   const formik = useFormik({
@@ -166,6 +172,29 @@ const SignupPage = () => {
                     ),
                 }}
                 />
+              </Grid>
+            )}
+
+            {signup && (
+              <Grid item>
+                <FormControl component="fieldset" error={formik.touched.gender && Boolean(formik.errors.gender)}>
+                  <FormLabel component="legend">Gender</FormLabel>
+                  <RadioGroup
+                    row
+                    name="gender"
+                    value={formik.values.gender}
+                    onChange={formik.handleChange}
+                  >
+                    <FormControlLabel value="male" control={<Radio />} label="Male" />
+                    <FormControlLabel value="female" control={<Radio />} label="Female" />
+                    <FormControlLabel value="other" control={<Radio />} label="Other" />
+                  </RadioGroup>
+                  {formik.touched.gender && formik.errors.gender && (
+                    <Typography variant="caption" color="error">
+                      {formik.errors.gender}
+                    </Typography>
+                  )}
+                </FormControl>
               </Grid>
             )}
 
