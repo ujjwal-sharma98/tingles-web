@@ -1,46 +1,46 @@
 import { Provider } from "react-redux";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import store from "./redux/store";
 import './App.css'
 
 import Home from "./pages/Home";
+import Feed from "./pages/Feed";
 import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
-import Header from "./components/Header";
 import MyMatches from "./pages/MyMatches";
 import Interests from "./pages/Interests";
 import Account from "./pages/Account";
 import Profile from "./pages/Profile";
 
-const Layout = ({ children }) => {
-  const location = useLocation();
-  const hideHeaderRoutes = ["/signup"];
-
-  return (
-    <div>
-      {!hideHeaderRoutes.includes(location.pathname) && <Header />}
-      {children}
-    </div>
-  );
-};
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#1976d2",
+      contrastText: "#ffffff",
+    },
+  },
+});
 
 function App() {
   return (
     <>
       <Provider store={store}>
+      <ThemeProvider theme={theme}>
         <Router>
-          <Layout>
             <Routes>
-              <Route exact path="/" element={<Home />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/my-matches" element={<MyMatches />} />
-              <Route path="/interests" element={<Interests />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/account" element={<Account />} />
+              <Route path="/dashboard" element={<Home />}>
+                <Route path="/dashboard" element={<Feed />} />
+                <Route path="/dashboard/my-matches" element={<MyMatches />} />
+                <Route path="/dashboard/interests" element={<Interests />} />
+                <Route path="/dashboard/profile" element={<Profile />} />
+                <Route path="/dashboard/account" element={<Account />} />
+              </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>
-          </Layout>
         </Router>
+        </ThemeProvider>
       </Provider>
     </>
   )
