@@ -1,15 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import Cookies from "js-cookie";
 import { BASE_URL } from '../../utils/constants';
 
 export const loginUser = createAsyncThunk(
     "auth/loginUser",
     async (userData, { rejectWithValue }) => {
       try {
-        const response = await axios.post(`${BASE_URL}/login`, userData);
-        console.log(response.data);
-        Cookies.set("token", response.data.token, { expires: 7 });
+        const response = await axios.post(`${BASE_URL}/login`, userData, { withCredentials: true });
         return response.data;
       } catch (error) {
         return rejectWithValue(error.response ? error.response.data : "Login failed");
@@ -21,9 +18,7 @@ export const signUpUser = createAsyncThunk(
     "auth/signUpUser",
     async (userData, { rejectWithValue }) => {
       try {
-        const response = await axios.post(`${BASE_URL}/signup`, userData);
-        console.log(response.data);
-        Cookies.set("token", response.data.token, { expires: 7 });
+        const response = await axios.post(`${BASE_URL}/signup`, userData, { withCredentials: true });
         return response.data;
       } catch (error) {
         return rejectWithValue(error.response ? error.response.data : "Sign up failed");
@@ -35,9 +30,7 @@ export const logOutUser = createAsyncThunk(
     "auth/logOutUser",
     async (userData, { rejectWithValue }) => {
       try {
-        const response = await axios.post(`${BASE_URL}/logout`, userData);
-        console.log(response.data);
-        Cookies.remove("token");
+        const response = await axios.post(`${BASE_URL}/logout`, userData,  { withCredentials: true });
         return response.data;
       } catch (error) {
         return rejectWithValue(error.response ? error.response.data : "Sign up failed");

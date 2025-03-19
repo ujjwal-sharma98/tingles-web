@@ -1,9 +1,14 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import Cookies from "js-cookie";
+
+const getCookie = (name) => {
+  const cookies = document.cookie.split("; ");
+  const cookie = cookies.find((c) => c.startsWith(name + "="));
+  return cookie ? cookie.split("=")[1] : null;
+};
 
 const ProtectedRoute = () => {
-  const token = Cookies.get("token");
+  const token = getCookie("token");
 
   return token ? <Outlet /> : <Navigate to="/signup" replace />;
 };

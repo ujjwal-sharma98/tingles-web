@@ -2,7 +2,6 @@ import { Provider } from "react-redux";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import store from "./redux/store";
-import './App.css'
 
 import Home from "./pages/Home";
 import Feed from "./pages/Feed";
