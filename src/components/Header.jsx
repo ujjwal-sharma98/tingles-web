@@ -3,6 +3,9 @@ import { AppBar, Toolbar, Typography, Box, IconButton, Menu, Container, Avatar, 
 import AdbIcon from "@mui/icons-material/Adb";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { logOutUser } from '../redux/reducers/authSlice';
 
 const pages = [{
     name: 'My Matches',
@@ -18,12 +21,12 @@ const settings = [{
 },{
     name: 'Account',
     link: '/account',
-},{
-    name: 'Logout',
-    link: '/signup',
 }];
 
 const Header = () => {
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -157,10 +160,17 @@ const Header = () => {
                 }}
               >
                 {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
                     <Link to={setting.link}><Typography sx={{ textAlign: 'center' }}>{setting.name}</Typography></Link>
                   </MenuItem>
                 ))}
+                <MenuItem onClick={() => {
+                    handleCloseUserMenu()
+                    dispatch(logOutUser())
+                    navigate("/signup");
+                }}>
+                    <Typography sx={{ textAlign: 'center' }}>Log Out</Typography>
+                </MenuItem>
               </Menu>
             </Box>
           </Toolbar>
