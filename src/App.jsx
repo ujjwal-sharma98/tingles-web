@@ -1,17 +1,19 @@
+import React, { Suspense, lazy } from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { CircularProgress, Box } from "@mui/material";
 import store from "./redux/store";
 
 import Home from "./pages/Home";
 import Feed from "./pages/Feed";
 import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
-import MyMatches from "./pages/MyMatches";
-import Interests from "./pages/Interests";
-import Account from "./pages/Account";
-import Profile from "./pages/Profile";
-// import ProtectedRoute from "./components/ProtectedRoute";
+const MyMatches = lazy(() => import("./pages/MyMatches"));
+const Interests = lazy(() => import("./pages/Interests"));
+const Account = lazy(() => import("./pages/Account"));
+const Profile = lazy(() => import("./pages/Profile"));
+import Protectedpass from "./components/ProtectedPass";
 
 const theme = createTheme({
   palette: {
@@ -28,9 +30,14 @@ function App() {
       <Provider store={store}>
       <ThemeProvider theme={theme}>
         <Router>
+        <Suspense fallback={
+            <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+              <CircularProgress />
+            </Box>
+          }>
             <Routes>
               <Route path="/signup" element={<Signup />} />
-                {/* <Route element={<ProtectedRoute />}> */}
+                <Route element={<Protectedpass />}>
                   <Route path="/dashboard" element={<Home />}>
                     <Route path="/dashboard" element={<Feed />} />
                     <Route path="/dashboard/my-matches" element={<MyMatches />} />
@@ -38,9 +45,10 @@ function App() {
                     <Route path="/dashboard/profile" element={<Profile />} />
                     <Route path="/dashboard/account" element={<Account />} />
                   </Route>
-                {/* </Route> */}
+                </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>
+          </Suspense>
         </Router>
         </ThemeProvider>
       </Provider>

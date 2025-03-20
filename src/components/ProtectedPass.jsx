@@ -7,10 +7,10 @@ const getCookie = (name) => {
   return cookie ? cookie.split("=")[1] : null;
 };
 
-const ProtectedRoute = () => {
+const ProtectedPass = () => {
   const token = getCookie("token");
 
   return token ? <Outlet /> : <Navigate to="/signup" replace />;
 };
 
-export default ProtectedRoute;
+export default ProtectedPass;
