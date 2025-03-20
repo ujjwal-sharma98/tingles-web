@@ -5,15 +5,6 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   build: {
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          if (id.includes("node_modules")) {
-            return "vendor"; // Split vendor files
-          }
-        },
-      },
-    },
-    chunkSizeWarningLimit: 1000,
+    minify: "esbuild", // ✅ Uses esbuild instead of Terser
   },
 })
