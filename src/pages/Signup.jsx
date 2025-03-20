@@ -70,7 +70,7 @@ const SignupPage = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate("/dashboard");
+      navigate("/");
     }
   }, [isLoggedIn, navigate]);
 

@@ -38,12 +38,12 @@ function App() {
             <Routes>
               <Route path="/signup" element={<Signup />} />
                 <Route element={<Protectedpass />}>
-                  <Route path="/dashboard" element={<Home />}>
-                    <Route path="/dashboard" element={<Feed />} />
-                    <Route path="/dashboard/my-matches" element={<MyMatches />} />
-                    <Route path="/dashboard/interests" element={<Interests />} />
-                    <Route path="/dashboard/profile" element={<Profile />} />
-                    <Route path="/dashboard/account" element={<Account />} />
+                  <Route path="/" element={<Home />}>
+                    <Route path="/" element={<Feed />} />
+                    <Route path="/my-matches" element={<MyMatches />} />
+                    <Route path="/interests" element={<Interests />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/account" element={<Account />} />
                   </Route>
                 </Route>
               <Route path="*" element={<NotFound />} />

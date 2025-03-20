@@ -10,18 +10,18 @@ import { logOutUser } from '../redux/reducers/authSlice';
 
 const pages = [{
     name: 'My Matches',
-    link: '/dashboard/my-matches',
+    link: '/my-matches',
 }, {
     name: 'Interests',
-    link: '/dashboard/interests',
+    link: '/interests',
 }];
 
 const settings = [{
     name: 'Profile',
-    link: '/dashboard/profile',
+    link: '/profile',
 },{
     name: 'Account',
-    link: '/dashboard/account',
+    link: '/account',
 }];
 
 const Header = () => {
@@ -68,7 +68,7 @@ const Header = () => {
                 textDecoration: 'none',
               }}
             >
-              <Link to={'/dashboard'}> Tingles </Link>
+              <Link to={'/'}> Tingles </Link>
             </Typography>
   
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
