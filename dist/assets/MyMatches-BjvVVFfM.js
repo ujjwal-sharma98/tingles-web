@@ -1,0 +1,1 @@
+import{j as t}from"./index-YpNqEmAQ.js";import{L as o}from"./Listing-DrbwKx0b.js";function i(){return t.jsx("div",{children:t.jsx(o,{title:"My Matches",buttons:[{text:"Unmatch",onClick:()=>console.log("Unmatched!!")},{text:"Chat",onClick:()=>console.log("Go to Chat Window!!")}],users:[{name:"Aishwarya Rai",age:27,location:"Mumbai"}]})})}export{i as default};
