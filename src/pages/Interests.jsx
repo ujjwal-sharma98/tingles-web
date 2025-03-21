@@ -1,7 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Listing from '../components/Listing'
+import { fetchInterestedPeople } from '../redux/reducers/matchesSlice'
 
 function Interests() {
+
+    const dispatch = useDispatch()
+    const { interests } = useSelector((state) => state.matchesReducer)
+
+    useEffect(() => {
+        dispatch(fetchInterestedPeople())
+    }, [dispatch])
+
+    console.log("interests >>", interests)
+
   return (
     <Listing 
             title={'Interests'}
