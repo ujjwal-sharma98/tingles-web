@@ -46,7 +46,7 @@ const interestSlice = createSlice({
             .addCase(reviewRequest.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 const { requestId } = action.meta.arg; // Passed argument to the async thunk
-                state.interestedPeople = state.availablePeople.filter(request => request._id !== requestId);
+                state.interestedPeople = state.interestedPeople.filter(request => request._id !== requestId);
             })
             .addCase(reviewRequest.rejected, (state, action) => {
                 state.status = 'failed';

@@ -71,7 +71,7 @@ const EditProfile = () => {
       });
       setLoading(false);
     }
-  }, [user]);
+  }, [user, formik]);
 
   return (
     <Container maxWidth="sm" sx={{ mt: 5 }}>
