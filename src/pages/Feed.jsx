@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import FeedCard from '../components/FeedCard';
-import { fetchAvailablePeople } from '../redux/reducers/matchesSlice';
+import { fetchAvailablePeople } from '../redux/reducers/feedSlice';
 
 function Feed() {
 
     const dispatch = useDispatch();
-    const { availablePeople } = useSelector((state) => state.matchesReducer);
+    const { availablePeople } = useSelector((state) => state.feedReducer);
 
     useEffect(() => {
         dispatch(fetchAvailablePeople());
