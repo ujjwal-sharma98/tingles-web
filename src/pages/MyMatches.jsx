@@ -20,9 +20,9 @@ function MyMatches() {
         dispatch(fetchMatches())
     }, [dispatch])
 
-    const unMatchUser = () => {}
+    const unMatchUser = () => { window.alert('Feature not added!') }
 
-    const chatWithUser = () => {}
+    const chatWithUser = () => { window.alert('Feature not added!') }
 
   return (
     <div>
@@ -36,32 +36,42 @@ function MyMatches() {
             </Typography>
 
             {matches.map((user, index) => (
-                <Card sx={{ mb: 3, boxShadow: 3 }} key={index}>
-                    
-                    <CardMedia
-                        component="img"
-                        height="150"
-                        image={user.photoUrl || "https://via.placeholder.com/150"} 
-                        alt={user.firstName}
-                        sx={{ objectFit: "cover" }} // Ensures the image fills the space nicely
-                    />
-
-                    <CardContent>
-                        <Typography variant="h6">{user.firstName}</Typography>
-                        <Typography color="textSecondary">
-                            {user.age || 'n/a'} years
-                        </Typography>
-                    </CardContent>
-
-                    <CardActions>
-                        <Button variant="contained" color="primary" onClick={() => unMatchUser()}>
-                            Un-match
-                        </Button>
-                            <Button variant="contained" color="primary" onClick={() => chatWithUser()}>
-                            Chat
-                        </Button>
-                    </CardActions>
-                </Card>
+                <Card key={index} sx={{ mb: 3, boxShadow: 3, textAlign: "center", p: 2, width: 280, mx: "auto" }}>
+  
+                {/* Square Image Section */}
+                <CardMedia
+                    component="img"
+                    image={user.photoUrl || "https://via.placeholder.com/150"}
+                    alt={user.firstName}
+                    sx={{
+                        width: 150,   // Makes it square
+                        height: 150,  // Equal width & height
+                        borderRadius: "8px",  // Slightly rounded corners for a modern look
+                        objectFit: "cover",
+                        margin: "auto" // Centers the image
+                    }}
+                />
+            
+                <CardContent>
+                    <Typography variant="h6" fontWeight="bold">
+                        {user.firstName}
+                    </Typography>
+                    <Typography color="textSecondary">
+                        {user.age || "N/A"} years
+                    </Typography>
+                </CardContent>
+            
+                <CardActions sx={{ justifyContent: "center" }}>
+                    <Button variant="contained" color="secondary" onClick={() => unMatchUser()}>
+                        Un-match
+                    </Button>
+                    <Button variant="contained" color="primary" onClick={() => chatWithUser()}>
+                        Chat
+                    </Button>
+                </CardActions>
+            
+            </Card>
+            
             ))}
         </Container>
     </div>
