@@ -17,14 +17,14 @@ import {
   ListItemText,
   CircularProgress
 } from "@mui/material";
-import { updateUser } from "../redux/reducers/userSlice"
+import { updateProfile } from "../redux/reducers/profileSlice";
 
 const skillsList = ["JavaScript", "React", "Node.js", "MongoDB", "CSS", "HTML"];
 
 const EditProfile = () => {
 
     const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.userReducer); // Get user from Redux store
+  const { user } = useSelector((state) => state.profileReducer); // Get user from Redux store
   const [loading, setLoading] = useState(true);
 
   const validationSchema = Yup.object({
@@ -53,7 +53,7 @@ const EditProfile = () => {
     onSubmit: (values) => {
       console.log("Form Data:", values);
       alert("Profile Updated Successfully!");
-      dispatch(updateUser(values))
+      dispatch(updateProfile(values))
     },
   });
 

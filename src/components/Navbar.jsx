@@ -31,7 +31,7 @@ const Header = () => {
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
 
-    const { user } = useSelector((state) => state.userReducer);
+    const { user } = useSelector((state) => state.profileReducer);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);

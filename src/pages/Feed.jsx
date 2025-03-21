@@ -6,7 +6,7 @@ import { fetchAvailablePeople } from '../redux/reducers/matchesSlice';
 function Feed() {
 
     const dispatch = useDispatch();
-    const { availablePeople } = useSelector((state) => state.userReducer);
+    const { availablePeople } = useSelector((state) => state.matchesReducer);
 
     useEffect(() => {
         dispatch(fetchAvailablePeople());

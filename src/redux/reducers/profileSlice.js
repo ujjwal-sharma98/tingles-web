@@ -8,7 +8,7 @@ const initialState = {
     error: null,
 };
 
-export const fetchUser = createAsyncThunk('user/fetchUser', async () => {
+export const fetchProfile = createAsyncThunk('profile/fetchProfile', async () => {
     try {
         const response = await axios.get(`${BASE_URL}/profile/view`, {
             withCredentials: true,
@@ -19,7 +19,7 @@ export const fetchUser = createAsyncThunk('user/fetchUser', async () => {
     }
 });
 
-export const updateUser = createAsyncThunk('user/updateUser', async (userData) => {
+export const updateProfile = createAsyncThunk('profile/updateProfile', async (userData) => {
     try {
         const response = await axios.patch(`${BASE_URL}/profile/edit`, userData, {
             withCredentials: true,
@@ -36,29 +36,29 @@ const userSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(fetchUser.pending, (state) => {
+            .addCase(fetchProfile.pending, (state) => {
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(fetchUser.fulfilled, (state, action) => {
+            .addCase(fetchProfile.fulfilled, (state, action) => {
                 state.user = action.payload;
                 state.loading = false;
                 state.error = null;
             })
-            .addCase(fetchUser.rejected, (state, action) => {
+            .addCase(fetchProfile.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
             })
-            .addCase(updateUser.pending, (state) => {
+            .addCase(updateProfile.pending, (state) => {
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(updateUser.fulfilled, (state, action) => {
+            .addCase(updateProfile.fulfilled, (state, action) => {
                 state.user = action.payload;
                 state.loading = false;
                 state.error = null;
             })
-            .addCase(updateUser.rejected, (state, action) => {
+            .addCase(updateProfile.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
             });

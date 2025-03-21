@@ -4,18 +4,18 @@ import { Container } from "@mui/material";
 import { useDispatch, useSelector } from 'react-redux';
 import Header from '../components/Navbar';
 import Footer from '../components/Footer';
-import { fetchUser } from '../redux/reducers/userSlice';
+import { fetchProfile } from '../redux/reducers/profileSlice';
 
 const HomePage = () => {
 
     const dispatch = useDispatch();
 
-    const { user } = useSelector((state) => state.userReducer);
+    const { user } = useSelector((state) => state.profileReducer);
 
     console.log("User Data:", user);
 
     useEffect(() => {
-        dispatch(fetchUser());
+        dispatch(fetchProfile());
     }, [dispatch]);
 
     return (
