@@ -9,7 +9,6 @@ import {
     CardActions,
     CardMedia,
 } from "@mui/material";
-import Listing from '../components/Listing'
 import { fetchMatches } from '../redux/reducers/matchesSlice'
 
 function MyMatches() {

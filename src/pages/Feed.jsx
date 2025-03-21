@@ -23,7 +23,7 @@ function Feed() {
             height: "80vh",
         }}
     >
-        <FeedCard currentUser={availablePeople[0]}/>
+        {availablePeople.length ? <FeedCard currentUser={availablePeople[0]}/> : <h1>No more people to show</h1>}
     </div>
   )
 }
