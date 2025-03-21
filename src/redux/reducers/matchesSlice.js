@@ -12,7 +12,7 @@ export const fetchMatches = createAsyncThunk('user/connections', async () => {
     const response = await axios.get(`${BASE_URL}/user/connections`, {
         withCredentials: true,
       });
-    return response.data;
+    return response.data.data;
 });
 
 const matchesSlice = createSlice({

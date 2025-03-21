@@ -12,7 +12,7 @@ export const fetchInterestedPeople = createAsyncThunk('user/requests', async () 
     const response = await axios.get(`${BASE_URL}/user/requests/received`, {
         withCredentials: true,
       });
-    return response.data;
+    return response.data.data;
 });
 
 const interestSlice = createSlice({

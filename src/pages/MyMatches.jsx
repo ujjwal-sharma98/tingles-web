@@ -12,19 +12,19 @@ function MyMatches() {
         dispatch(fetchMatches())
     }, [dispatch])
 
-    console.log("Matches Data:", matches)
+    const unMatchUser = () => {}
+
+    const chatWithUser = () => {}
 
   return (
     <div>
         <Listing 
             title={'My Matches'}
             buttons={[
-                { text: 'Unmatch', onClick: () => console.log('Unmatched!!') },
-                { text: 'Chat', onClick: () => console.log('Go to Chat Window!!') },
+                { text: 'Unmatch', buttonFn: unMatchUser },
+                { text: 'Chat', buttonFn: chatWithUser },
             ]}
-            users={[
-                { name: 'Aishwarya Rai', age: 27, location: 'Mumbai' },
-            ]}
+            users={matches}
         />
     </div>
   )
