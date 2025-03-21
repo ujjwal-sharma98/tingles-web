@@ -28,15 +28,15 @@ function Listing(props) {
                     <CardMedia
                         component="img"
                         height="150"
-                        image={user.imageUrl || "https://via.placeholder.com/150"} 
-                        alt={user.name}
+                        image={user.fromUserId.photoUrl || "https://via.placeholder.com/150"} 
+                        alt={user.fromUserId.firstName}
                         sx={{ objectFit: "cover" }} // Ensures the image fills the space nicely
                     />
 
                     <CardContent>
                         <Typography variant="h6">{user.name}</Typography>
                         <Typography color="textSecondary">
-                            {user.age} years, {user.location}
+                            {user.fromUserId.age} years
                         </Typography>
                     </CardContent>
 

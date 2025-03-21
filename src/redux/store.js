@@ -11,7 +11,7 @@ const store = configureStore({
         profileReducer,
         matchesReducer,
         interestsReducer,
-        feedReducer
+        feedReducer,
     }
 });
 
