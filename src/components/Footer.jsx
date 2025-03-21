@@ -17,10 +17,10 @@ const Footer = () => {
     return (
         <footer className={classes.footer}>
             <Typography variant="body2" color="inherit">
-                &copy; {new Date().getFullYear()} Your Website Name
+                &copy; {new Date().getFullYear()} Tingles
             </Typography>
             <Typography variant="body2" color="inherit">
-                Made with love by <Link href="https://www.example.com">Your Name</Link>
+                Made for fun by Ujjwal
             </Typography>
         </footer>
     );

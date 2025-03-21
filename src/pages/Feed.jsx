@@ -12,8 +12,6 @@ function Feed() {
         dispatch(fetchAvailablePeople());
     }, [dispatch]);
 
-    console.log("Available People:", availablePeople)
-
   return (
     <div
         style={{

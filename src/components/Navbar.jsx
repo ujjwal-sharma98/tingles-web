@@ -77,7 +77,7 @@ const Header = () => {
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
-                onClick={() => handleOpenNavMenu}
+                onClick={(e) => handleOpenNavMenu(e)}
                 color="inherit"
               >
                 <MenuIcon />
@@ -105,12 +105,12 @@ const Header = () => {
                 ))}
               </Menu>
             </Box>
-            <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+            {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
             <Typography
               variant="h5"
               noWrap
               component="a"
-              href="#app-bar-with-responsive-menu"
+              onClick={() => navigate('/')}
               sx={{
                 mr: 2,
                 display: { xs: 'flex', md: 'none' },
@@ -122,7 +122,7 @@ const Header = () => {
                 textDecoration: 'none',
               }}
             >
-              LOGO
+              Tingles
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end', marginRight: '40px' }}>
               {pages.map((page) => (

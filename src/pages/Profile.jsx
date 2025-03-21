@@ -51,7 +51,6 @@ const EditProfile = () => {
     },
     validationSchema,
     onSubmit: (values) => {
-      console.log("Form Data:", values);
       alert("Profile Updated Successfully!");
       dispatch(updateProfile(values))
     },
@@ -71,7 +70,7 @@ const EditProfile = () => {
       });
       setLoading(false);
     }
-  }, [user, formik]);
+  }, [user]);
 
   return (
     <Container maxWidth="sm" sx={{ mt: 5 }}>

@@ -59,7 +59,6 @@ const SignupPage = () => {
     },
     validationSchema,
     onSubmit: (values) => {
-        console.log("Form Data:", values);
         if (signup) {
             dispatch(signUpUser(values))
         } else {
