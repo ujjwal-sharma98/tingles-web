@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Avatar, Box, Button, Paper, TextField, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import { createSocketConnection } from "../utils/socketConnection";
 
 const Chat = () => {
     const { targetUserId } = useParams();
@@ -9,6 +10,15 @@ const Chat = () => {
     const [newMessage, setNewMessage] = useState("");
     const messagesEndRef = useRef(null);
     const { user } = useSelector((state) => state.profileReducer);
+
+    useEffect(() => {
+        const socket = createSocketConnection();
+        socket.emit('joinChat', { userId: user?.id, targetUserId });
+
+        return () => {
+            socket.disconnect();
+          };
+    }, [user?.id, targetUserId]);
 
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
