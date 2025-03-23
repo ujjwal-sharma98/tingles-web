@@ -35,7 +35,7 @@ const EditProfile = () => {
     gender: Yup.string().oneOf(["male", "female", "other"], "Invalid gender").required("Required"),
     photoUrl: Yup.string().url("Invalid URL"),
     about: Yup.string(),
-    skills: Yup.array().min(1, "Select at least one skill"),
+    // skills: Yup.array().min(1, "Select at least one skill"),
   });
 
   const formik = useFormik({
