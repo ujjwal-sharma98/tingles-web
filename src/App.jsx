@@ -13,6 +13,7 @@ const MyMatches = lazy(() => import("./pages/MyMatches"));
 const Interests = lazy(() => import("./pages/Interests"));
 const Account = lazy(() => import("./pages/Account"));
 const Profile = lazy(() => import("./pages/Profile"));
+const ChatPage = lazy(() => import("./pages/ChatPage"));
 import Protectedpass from "./components/ProtectedPass";
 
 const theme = createTheme({
@@ -44,6 +45,7 @@ function App() {
                     <Route path="/interests" element={<Interests />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/account" element={<Account />} />
+                    <Route path="/chat/:toUserId" element={<ChatPage />} />
                   </Route>
                 </Route>
               <Route path="*" element={<NotFound />} />

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 import {
     Container,
     Typography,
@@ -14,6 +15,7 @@ import { fetchMatches } from '../redux/reducers/matchesSlice'
 function MyMatches() {
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const { matches } = useSelector((state) => state.matchesReducer)
 
     useEffect(() => {
@@ -22,7 +24,9 @@ function MyMatches() {
 
     const unMatchUser = () => { window.alert('Feature not added!') }
 
-    const chatWithUser = () => { window.alert('Feature not added!') }
+    const chatWithUser = (targetUserId) => { 
+        navigate(`/chat/${targetUserId}`)
+    }
 
   return (
     <div>
@@ -65,7 +69,7 @@ function MyMatches() {
                     <Button variant="contained" color="secondary" onClick={() => unMatchUser()}>
                         Un-match
                     </Button>
-                    <Button variant="contained" color="primary" onClick={() => chatWithUser()}>
+                    <Button variant="contained" color="primary" onClick={() => chatWithUser(user._id)}>
                         Chat
                     </Button>
                 </CardActions>

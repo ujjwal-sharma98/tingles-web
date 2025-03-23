@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles'; // ✅ Corrected import for makeStyles
-import { Typography, Link } from '@mui/material'; // ✅ Updated import path
+import { Typography } from '@mui/material'; // ✅ Updated import path
 
 const useStyles = makeStyles((theme) => ({
     footer: {
