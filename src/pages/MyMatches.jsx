@@ -10,7 +10,7 @@ import {
     CardActions,
     CardMedia,
 } from "@mui/material";
-import { fetchMatches } from '../redux/reducers/matchesSlice'
+import { fetchMatches, setChatUser } from '../redux/reducers/matchesSlice'
 
 function MyMatches() {
 
@@ -24,8 +24,9 @@ function MyMatches() {
 
     const unMatchUser = () => { window.alert('Feature not added!') }
 
-    const chatWithUser = (targetUserId) => { 
-        navigate(`/chat/${targetUserId}`)
+    const chatWithUser = (user) => { 
+        dispatch(setChatUser(user))
+        navigate(`/chat/${user._id}`)
     }
 
   return (
@@ -69,7 +70,7 @@ function MyMatches() {
                     <Button variant="contained" color="secondary" onClick={() => unMatchUser()}>
                         Un-match
                     </Button>
-                    <Button variant="contained" color="primary" onClick={() => chatWithUser(user._id)}>
+                    <Button variant="contained" color="primary" onClick={() => chatWithUser(user)}>
                         Chat
                     </Button>
                 </CardActions>

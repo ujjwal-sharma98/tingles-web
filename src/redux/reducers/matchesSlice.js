@@ -4,6 +4,7 @@ import { BASE_URL } from '../../utils/constants';
 
 const initialState = {
     matches: [],
+    chatUser: null,
     status: 'idle',
     error: null,
 };
@@ -18,7 +19,11 @@ export const fetchMatches = createAsyncThunk('user/connections', async () => {
 const matchesSlice = createSlice({
     name: 'matches',
     initialState,
-    reducers: {},
+    reducers: {
+        setChatUser: (state, action) => {
+            state.chatUser = action.payload;
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchMatches.pending, (state) => {
@@ -35,5 +40,5 @@ const matchesSlice = createSlice({
     },
 });
 
-export const matchActions = matchesSlice.actions;
+export const { setChatUser } = matchesSlice.actions;
 export default matchesSlice.reducer;
