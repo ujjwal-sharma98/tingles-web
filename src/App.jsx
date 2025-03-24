@@ -45,7 +45,7 @@ function App() {
                     <Route path="/interests" element={<Interests />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/account" element={<Account />} />
-                    <Route path="/chat/:toUserId" element={<ChatPage />} />
+                    <Route path="/chat/:targetUserId" element={<ChatPage />} />
                   </Route>
                 </Route>
               <Route path="*" element={<NotFound />} />

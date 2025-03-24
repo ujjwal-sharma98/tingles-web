@@ -10,15 +10,23 @@ const Chat = () => {
     const [newMessage, setNewMessage] = useState("");
     const messagesEndRef = useRef(null);
     const { user } = useSelector((state) => state.profileReducer);
+    const userId = user?._id;
+    const firstName = user?.firstName;
 
     useEffect(() => {
+        if (!userId) return;
         const socket = createSocketConnection();
-        socket.emit('joinChat', { userId: user?.id, targetUserId });
+        
+        socket.emit('joinChat', { firstName, userId, targetUserId });
+
+        socket.on('messageReceived', ({ firstName, text }) => {
+            setMessages((prev) => [...prev, { text }]);
+        })
 
         return () => {
             socket.disconnect();
-          };
-    }, [user?.id, targetUserId]);
+        };
+    }, [userId, targetUserId]);
 
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -26,7 +34,8 @@ const Chat = () => {
 
     const sendMessage = () => {
         if (newMessage.trim()) {
-            setMessages((prev) => [...prev, { text: newMessage }]);
+            const socket = createSocketConnection();
+            socket.emit('sendMessage', { firstName, userId, targetUserId, text: newMessage });
             setNewMessage("");
         }
     };
