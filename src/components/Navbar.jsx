@@ -20,10 +20,10 @@ const settings = [{
     name: 'Profile',
     link: '/profile',
 },
-// {
-//     name: 'Account',
-//     link: '/account',
-// }
+{
+    name: 'Account',
+    link: '/account',
+}
 ];
 
 const Header = () => {
