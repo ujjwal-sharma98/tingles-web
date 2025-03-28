@@ -71,7 +71,7 @@ const Account = () => {
             <Card>
                 <CardContent> {isUserPremium ? ("You're are already a premium user") : (<>
                     <Typography variant="h5" component="h2">
-                        Select a Plan
+                        Select a Plan!
                     </Typography>
                     <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                         {plans.map((plan, index) => (<Card key={index} sx={{ width: 300, height: 200, display: "flex", flexDirection: "column", justifyContent: "space-between", marginTop: '20px' }}>
